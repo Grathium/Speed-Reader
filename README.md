@@ -10,4 +10,4 @@ Possible Improvements: implement mnemonic devices to improve memory retention
 > $ node ./main.js <fileName> <tickSpeed>
 
 ### WARNING:  
-this project is **very** badly designed. This is just the quickist way i could develop a working prototype
+this project is **very** poorly designed. This is just the quickist way i could develop a working prototype
