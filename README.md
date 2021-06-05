@@ -6,4 +6,8 @@ Current Limitations: memory retention is very poor when using the program
 
 Possible Improvements: implement mnemonic devices to improve memory retention
 
-WARNING: this project is **very** badly designed. This is just the quickist way i could develop a working prototype
+### Usage:
+> $ node ./main.js <fileName> <tickSpeed>
+
+### WARNING:  
+this project is **very** badly designed. This is just the quickist way i could develop a working prototype
