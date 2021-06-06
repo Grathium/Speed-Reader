@@ -19,28 +19,31 @@
 
         #display-text {
             position: absolute;
+
+            /* studies have shown that black on white text provided a higher
+            degree of memory retention */
             color: black;
             left: 50%;
             top: 50%;
             transform: translate(-50%, calc(-50% - 64px));
             font-size: 64px;
+
+            /* as bad as comic sans is, studies at princeton showed that
+            "harder to read" fonts resulted in higher memory retention */
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
     </style>
 </head>
 
 <body>
     <h1 id="display-text">Awaiting Input...</h1>
+    <button onclick="location.reload();">Replay</button>
 </body>
 
 <footer>
     <script>
         // Create WebSocket connection.
         const socket = new WebSocket("ws://localhost:8080");
-
-        // Connection opened
-        socket.addEventListener("open", function (event) {
-            socket.send("start");
-        });
 
         // Listen for messages
         socket.addEventListener("message", function (event) {

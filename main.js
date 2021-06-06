@@ -5,6 +5,10 @@ var sleep = require("thread-sleep");
 // this is really bad practice, but i"m so tired
 let words = [];
 
+let flattenArray = (arrayIn) => {
+    return arrayIn.flat();
+}
+
 let splitWords = (textIn) => {
     textIn += " ";
 
@@ -36,7 +40,9 @@ let main = () => {
 
     lineReader.on("line", function (line) {
         // split each line into words
-        words = splitWords(line);
+        words.push(splitWords(line));
+
+        words = flattenArray(words);
     });
 
     var app = express();
@@ -64,15 +70,28 @@ const serverPort = 8080,
 websocketServer.on("connection", (webSocketClient) => {
     let tickSpeed = process.argv.slice(3)[0];
 
-    //send feedback to the incoming connection
+    // send feedback to the incoming connection
+    console.log(words);
     for (let i = 0; i < words.length; i++) {
+        printWord = words[i];
+        
+        if (printWord == null) {
+            sleep(Number(tickSpeed));
+            continue;
+        }
+
         websocketServer
             .clients
             .forEach(client => {
                 //send the client the current message
                 sleep(Number(tickSpeed));
-                client.send(words[i]);
+                client.send(printWord);
             });
+        
+        // if it is the end of a sentence, double the wait time
+        if (printWord[printWord.length - 2] == ".") {
+            sleep(Number(Math.ceil(tickSpeed / 2)));
+        }
     }
 });
 
